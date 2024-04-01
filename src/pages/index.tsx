@@ -98,7 +98,7 @@ export default function Home() {
             </button>
           </div>
           <div className="flex justify-between w-full h-24">
-            <div className="flex flex-col gap-3  w-40 h-full justify-between">
+            <div className="flex flex-col gap-3  w-40 h-full items-center justify-between">
               <input
                 type="text"
                 placeholder="Enter LP amount"
@@ -106,7 +106,7 @@ export default function Home() {
                 onChange={(e) => {
                   setAmount(e.target.value);
                 }}
-                className=" bg-transparent border-2 px-3 border-white rounded text-white"
+                className=" bg-transparent border-2 px-3 w-full border-white rounded text-white"
               />
               <button
                 onClick={async () => {
