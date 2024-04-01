@@ -1,4 +1,4 @@
-[
+export const Data = [
   {
     "value": [
       "0x02Dd3B64862Df9baB28ADE926EB81B2d4ea65ACC",
@@ -701,3 +701,4 @@
     ]
   }
 ]
+

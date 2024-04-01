@@ -8,6 +8,7 @@ import {
   callClaimableTime,
 } from "@/contractInteractions/useAppContracts";
 import { useEffect, useState } from "react";
+import { ethers } from "ethers";
 
 export default function Home() {
   const [amount, setAmount] = useState<string>("");
@@ -23,6 +24,7 @@ export default function Home() {
   const [getTime, setGetTime] = useState<number>(new Date().getTime());
   useEffect(() => {
     if (address) {
+      getProof();
       const interval = setInterval(() => {
         setGetTime(new Date().getTime());
       }, 1000);
@@ -34,6 +36,17 @@ export default function Home() {
       const claimableTime = await callClaimableTime();
       console.log(claimableTime);
       claimableTime && setExpTime(Number(claimableTime));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const [proof, setProof] = useState<any>(null);
+  async function getProof() {
+    try {
+      const res = await fetch(`/api/getproof?address=${address}`);
+      const data = await res.json();
+      setProof(data.reponse);
+      console.log("data", data);
     } catch (error) {
       console.log(error);
     }
@@ -86,11 +99,21 @@ export default function Home() {
 
           <div className="flex flex-col gap-2 items-center  w-full">
             <p className="text-center w-full">
-              You are eligble to claim 10.000 $DOS !!
+              You are eligble to claim{" "}
+              {proof?.amount ? (proof?.amount / 10 ** 18).toFixed(2) : 0} $DOS
+              !!
             </p>
             <button
               onClick={async () => {
-                await callClaim();
+                if (proof) {
+                  await callAirDropClaim(
+                    proof.proof,
+                    proof.amount,
+                    proof.address
+                  );
+                } else {
+                  alert("You are not eligible to claim");
+                }
               }}
               className="btn"
             >
@@ -112,6 +135,7 @@ export default function Home() {
                 onClick={async () => {
                   await callApprove(parseInt(amount));
                 }}
+                disabled
                 className="btn"
               >
                 Approve LP
@@ -124,6 +148,7 @@ export default function Home() {
                 onClick={async () => {
                   await callBurn(parseInt(amount));
                 }}
+                disabled
               >
                 BURN LP
               </button>
@@ -137,19 +162,7 @@ export default function Home() {
                   : "Timer"
               }`}
             </div>
-            <button
-              onClick={async () => {
-                await callAirDropClaim([
-                  '0x2066ef03b8398a799f8d2b6d78129024c8ac4bbb66fd1a47701828981f79843d',
-                  '0x406e3ca90b494057a32a5fdd2e0ee621328134c4ef49cc84cf34c04c644db09d',
-                  '0x1d857ff0172beca531a1006236fdb19915dfef2660f066c215bf208e013bd4f1',
-                  '0x2c88b11d35ff9f7a0da30747154bb419ab1d4f54831809a8e8bc2c562ba438bb',
-                  '0xdcb85b78ca02db3f80319e09b6a9cc89bc90e265a62445ac5690ebba38c259ee',
-                  '0x762921b5c36e7bb3eb545bd9ed61f7e499662e8390fac0d36303794d3deb3e52'
-                ],"26425897380000000000000", "0xF953371547f7708fA8bFa4d347EA34cc4B45bEe9");
-              }}
-              className="btn"
-            >
+            <button onClick={async () => {}} disabled className="btn">
               CLAIM
             </button>
           </div>

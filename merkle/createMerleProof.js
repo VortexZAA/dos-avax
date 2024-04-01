@@ -5,14 +5,14 @@ const tree = StandardMerkleTree.load(JSON.parse(fs.readFileSync("tree.json")));
 // all merkleProofs
 
 //(2)
-/* const array = [];
+const array = [];
 for (const [i, v] of tree.entries()) {
   array.push({
     value: v,
     proof: tree.getProof(i),
   });
 }
-console.log(array); */
+console.log(array);
 
 //selectedMerleProofs
  for (const [i, v] of tree.entries()) {
@@ -23,4 +23,4 @@ console.log(array); */
   }
  }
 
-/* fs.writeFileSync("treeProofs.json", JSON.stringify(array)); */
+fs.writeFileSync("treeProofs.json", JSON.stringify(array));
