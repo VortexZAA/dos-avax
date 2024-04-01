@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -78,8 +79,28 @@ export default function Home() {
             alt="roadmap"
           />
         </div>
-        <div>
-          {/* TODO: FOOTER EKLE */}
+        
+        <div className="flex gap-3 items-center justify-end w-full pr-4">
+          <Link href="https://www.avax.network/" target="_blank">
+            <Image
+                src="/avax.svg"
+                width={40}
+                height={40}
+                className="h-20 w-20 rounded-full bg-white object-contain"
+                alt="roadmap"
+              />
+          </Link>
+          <Link href="https://twitter.com/DosAvax" target="_blank">
+            <div className="flex gap-1 items-center">
+              <Image
+                  src="/x.svg"
+                  width={40}
+                  height={40}
+                  className="h-20 w-20 rounded-full object-fill"
+                  alt="roadmap"
+                />@DosAvax
+            </div>
+          </Link>
         </div>
       </div>
     </main>
