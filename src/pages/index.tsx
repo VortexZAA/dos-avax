@@ -6,7 +6,7 @@ import {
   callBurn,
   callClaim,
   callClaimableTime,
-} from "../../contractInteractions/useAppContracts";
+} from "@/contractInteractions/useAppContracts";
 import { useEffect, useState } from "react";
 
 export default function Home() {
