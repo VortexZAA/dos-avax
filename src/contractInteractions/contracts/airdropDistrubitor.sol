@@ -8,7 +8,6 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 contract MerkleDistributor{
     address public immutable  token;
     bytes32 public immutable  merkleRoot;
-    uint256 public dropAmount;
     address public owner;
 
     // This is a packed array of booleans.
@@ -20,6 +19,10 @@ contract MerkleDistributor{
         owner = msg.sender;
     }
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, "MerkleDistributor: Caller is not the owner");
+        _;
+    }
 
     function claim( bytes32[] calldata merkleProof, uint256 amount, address addr) external  {
 
@@ -35,4 +38,9 @@ contract MerkleDistributor{
         whitelistClaimed[msg.sender] = true;
         require(IERC20(token).transfer(msg.sender, amount), "MerkleDistributor: Transfer failed.");
         }
+
+    
+    function withdrawToken(address to, uint256 amount) public onlyOwner {
+        require(IERC20(token).transfer(to, amount), "MerkleDistributor: Withdraw failed");
     }
+}
