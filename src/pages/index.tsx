@@ -11,7 +11,6 @@ export default function Home() {
           <div className="paragraph-title">
             <h1 className="text-7xl">READ FIRST</h1>
           </div>
-
           <div className="paragraph font-semibold text-xl w-2/3">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
