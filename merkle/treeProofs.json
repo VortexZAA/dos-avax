@@ -1,0 +1,54 @@
+[
+  {
+    "value": [
+      "0xb34380Bc73D308870373039893ad05cb23Aa6414",
+      "10000000000000000000"
+    ],
+    "proof": [
+      "0x3483e7fb4283806a71ac3ef8b18201fcfeb921507ec82a2ab35c408d36c8d493",
+      "0xcd91b6aaccd1959ef8129e03dca701ca9b782869f17d3a7491e40e4eeeb07107",
+      "0x1835facdb99e1fa691433822efff1e6280107702c5a488bf8f45bf7f1a216791"
+    ]
+  },
+  {
+    "value": [
+      "0xF953371547f7708fA8bFa4d347EA34cc4B45bEe9",
+      "20000000000000000000"
+    ],
+    "proof": [
+      "0x5891931ff46248af0cb898a3712c923921bb79e3a679b5dcdf95164fcc45076b",
+      "0xcd91b6aaccd1959ef8129e03dca701ca9b782869f17d3a7491e40e4eeeb07107",
+      "0x1835facdb99e1fa691433822efff1e6280107702c5a488bf8f45bf7f1a216791"
+    ]
+  },
+  {
+    "value": [
+      "0xceE5F1F761D2C9cDc0af072b9e56Ccb316C6929D",
+      "30000000000000000000"
+    ],
+    "proof": [
+      "0x9caf0f4bd0e537261a7bbbd819e64153d34946cca2bb3d013eb7e7ded44838aa",
+      "0x3b00c7c159352ce782d0b48a2993d312b34f43328c961cc647b291c3e3cc61b3"
+    ]
+  },
+  {
+    "value": [
+      "0x4Bca10538d18185F8DCEBA2fdF5C3222192875a4",
+      "40000000000000000000"
+    ],
+    "proof": [
+      "0x7c791da6f5c23292e5d52b9dad0c4ba13536f6b586925f5dd70d154fb99d668d",
+      "0x3b00c7c159352ce782d0b48a2993d312b34f43328c961cc647b291c3e3cc61b3"
+    ]
+  },
+  {
+    "value": [
+      "0x6cf248FA25066b99F3f1b69FE0d8199841e69977",
+      "50000000000000000000"
+    ],
+    "proof": [
+      "0x4e5ac73d8525b89e9c0d8b8aa91fc0b73e7b67463bba46ab398aa9a4b3eb9071",
+      "0x1835facdb99e1fa691433822efff1e6280107702c5a488bf8f45bf7f1a216791"
+    ]
+  }
+]

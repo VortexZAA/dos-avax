@@ -1,16 +1,26 @@
 import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
 import fs from "fs";
-
 // (1)
 const tree = StandardMerkleTree.load(JSON.parse(fs.readFileSync("tree.json")));
 // all merkleProofs
 
 //(2)
+const array = [];
 for (const [i, v] of tree.entries()) {
-  console.log('value:', v);
+  /* console.log('value:', v);
   console.log('proof:', tree.getProof(i));
+  console.log({
+    value: v,
+    proof: tree.getProof(i)
+  
+  });
+   */
+  array.push({
+    value: v,
+    proof: tree.getProof(i),
+  });
 }
-
+console.log(array);
 
 // // selectedMerleProofs
 // for (const [i, v] of tree.entries()) {
@@ -22,4 +32,4 @@ for (const [i, v] of tree.entries()) {
 //   }
 // }
 
-fs.writeFileSync("treeProofs.json", JSON.stringify(treeProofs.dump()));
+fs.writeFileSync("treeProofs.json", JSON.stringify(array));
