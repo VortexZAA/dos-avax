@@ -28,7 +28,7 @@ export default async function GET(req: NextRequest) {
       return NextResponse.json({
         address: address || "",
         status: "error",
-        msg: "There was a problem2",
+        msg: "There was a problem",
       });
     }
   } catch (error: any) {
