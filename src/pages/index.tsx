@@ -1,17 +1,56 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  callAirDrop,
+  callApprove,
+  callBurn,
+  callClaim,
+  callClaimableTime,
+} from "../../contractInteractions/useAppContracts";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [amount, setAmount] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [expTime, setExpTime] = useState<number>(0);
+  //connect metamask function
+  async function connectMetamask() {
+    const ethereum = (window as any).ethereum;
+    await ethereum.request({ method: "eth_requestAccounts" });
+    const accounts = await ethereum.request({ method: "eth_accounts" });
+    setAddress(accounts[0]);
+  }
+  const [getTime, setGetTime] = useState<number>(new Date().getTime());
+  useEffect(() => {
+    if (address) {
+      const interval = setInterval(() => {
+        setGetTime(new Date().getTime());
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [address]);
+  async function getClaimableTime() {
+    try {
+      const claimableTime = await callClaimableTime();
+      console.log(claimableTime);
+      claimableTime && setExpTime(Number(claimableTime));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getClaimableTime();
+  }, []);
   return (
     <main
-      className={`flex min-h-screen flex-col gap-12 items-center w-[100vw] overflow-x-hidden relative justify-between p-20`}
+      className={`flex min-h-screen flex-col gap-32 items-center w-[100vw] overflow-x-hidden relative justify-between px-8 pb-3`}
     >
-      <div className="grid grid-cols-2 w-full gap-10 ">
-        <div className="flex flex-col w-full gap-6 pl-6">
+      <div className="grid grid-cols-2 w-full gap-20 pt-6">
+        <div className="flex flex-col w-full gap-6 ">
           <div className="paragraph-title">
             <h1 className="text-7xl">READ FIRST</h1>
           </div>
-          <div className="paragraph font-semibold text-xl w-2/3">
+          <div className="paragraph font-semibold text-base w-full">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
               a gravida tellus. In ex felis, semper at efficitur sit amet,
@@ -36,34 +75,76 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-full gap-3 h-full justify-between py-6">
+        <div className="flex flex-col w-full gap-3 h-full justify-between pb-6">
           <div className="flex w-full  justify-end">
-            <button className="btn">Connect Wallet</button>
+            <button className="btn" onClick={connectMetamask}>
+              {address
+                ? address.slice(0, 6) + "..." + address.slice(-8)
+                : "Connect Wallet"}
+            </button>
           </div>
 
-          <div className="flex flex-col gap-2 items-center w-full">
-            <p>You are eligble to claim 10.000 $DOS !!</p>
-            <button className="btn">CLAIM</button>
+          <div className="flex flex-col gap-2 items-center  w-full">
+            <p className="text-center w-full">
+              You are eligble to claim 10.000 $DOS !!
+            </p>
+            <button
+              onClick={async () => {
+                await callClaim();
+              }}
+              className="btn"
+            >
+              CLAIM
+            </button>
           </div>
           <div className="flex justify-between w-full h-24">
             <div className="flex flex-col gap-3  w-40 h-full justify-between">
               <input
                 type="text"
                 placeholder="Enter LP amount"
+                value={amount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                }}
                 className=" bg-transparent border-2 px-3 border-white rounded text-white"
               />
-              <button className="btn">Approve LP</button>
+              <button
+                onClick={async () => {
+                  await callApprove(parseInt(amount));
+                }}
+                className="btn"
+              >
+                Approve LP
+              </button>
             </div>
             <div className="flex flex-col gap-3 w-40 h-full justify-between">
               <p>Burn xxx amount LP sky rocket $DOS</p>
-              <button className="btn">BURN LP</button>
+              <button
+                className="btn"
+                onClick={async () => {
+                  await callBurn(parseInt(amount));
+                }}
+              >
+                BURN LP
+              </button>
             </div>
           </div>
           <div className="flex flex-col items-center gap-3 justify-center">
             <div className=" border-2 px-3 border-white rounded text-center w-40">
-              Timer
+              {` ${
+                getTime < expTime
+                  ? new Date(expTime - getTime).toISOString().substr(11, 8)
+                  : "Timer"
+              }`}
             </div>
-            <button className="btn">CLAIM</button>
+            <button
+              onClick={async () => {
+                await callClaim();
+              }}
+              className="btn"
+            >
+              CLAIM
+            </button>
           </div>
         </div>
       </div>
@@ -78,26 +159,31 @@ export default function Home() {
             alt="roadmap"
           />
         </div>
-        
+
         <div className="flex gap-3 items-center justify-end w-full pr-4">
-          <Link href="https://www.avax.network/" className="h-20 w-20 rounded-full bg-white p-3 flex justify-center items-center" target="_blank">
+          <Link
+            href="https://www.avax.network/"
+            className="h-20 w-20 rounded-full bg-white p-3 flex justify-center items-center"
+            target="_blank"
+          >
             <Image
-                src="/avax.svg"
-                width={40}
-                height={40}
-                className=" object-contain h-full w-full"
-                alt="roadmap"
-              />
+              src="/avax.svg"
+              width={40}
+              height={40}
+              className=" object-contain h-full w-full"
+              alt="roadmap"
+            />
           </Link>
           <Link href="https://twitter.com/DosAvax" target="_blank">
             <div className="flex gap-1 items-center">
               <Image
-                  src="/x.svg"
-                  width={40}
-                  height={40}
-                  className="h-20 w-20 rounded-full object-fill"
-                  alt="roadmap"
-                />@DosAvax
+                src="/x.svg"
+                width={40}
+                height={40}
+                className="h-20 w-20 rounded-full object-fill"
+                alt="roadmap"
+              />
+              @DosAvax
             </div>
           </Link>
         </div>

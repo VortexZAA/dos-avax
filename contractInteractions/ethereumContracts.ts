@@ -1,5 +1,4 @@
-import { Contract, ethers } from 'ethers';
-import { JsonRpcProvider } from '@ethersproject/providers';
+import { ethers } from 'ethers';
 import TokenAbi from "./ABIS/tokenAbi.json";
 import AirDropAbi from "./ABIS/airDrop.json";
 import BurnDropAbi from "./ABIS/burnDrop.json";
