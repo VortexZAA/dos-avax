@@ -6,10 +6,10 @@ import {
 } from "./ethereumContracts";
 
 //AirDrop functions
-export const callAirDrop = async (amount: number, merkleProof: string[]) => {
+export const callAirDropClaim = async (merkleProof: string[], amount: number, holder:string) => {
   try {
     const { contractWithSigner } = await callAirDropContract();
-    const claim = await contractWithSigner.claim(amount, merkleProof);
+    const claim = await contractWithSigner.claim(merkleProof, amount, holder);
     return await claim;
   } catch (error) {
     console.log(error);
