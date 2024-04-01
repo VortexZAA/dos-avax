@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main
-      className={`flex min-h-screen flex-col gap-12 items-center w-[100vw] overflow-x-hidden relative justify-between p-6`}
+      className={`flex min-h-screen flex-col gap-12 items-center w-[100vw] overflow-x-hidden relative justify-between p-20`}
     >
       <div className="grid grid-cols-2 w-full gap-10 ">
         <div className="flex flex-col w-full gap-6 pl-6">
@@ -68,7 +68,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full gap-10 items-center">
+      <div className="flex flex-col w-full gap-20 items-center">
         <h1 className="text-7xl w-full text-center">ROADMAP</h1>
         <div className="flex  items-center justify-center w-2/3">
           <Image
@@ -81,12 +81,12 @@ export default function Home() {
         </div>
         
         <div className="flex gap-3 items-center justify-end w-full pr-4">
-          <Link href="https://www.avax.network/" target="_blank">
+          <Link href="https://www.avax.network/" className="h-20 w-20 rounded-full bg-white p-3 flex justify-center items-center" target="_blank">
             <Image
                 src="/avax.svg"
                 width={40}
                 height={40}
-                className="h-20 w-20 rounded-full bg-white object-contain"
+                className=" object-contain h-full w-full"
                 alt="roadmap"
               />
           </Link>
