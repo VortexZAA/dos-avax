@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: white;
+  @apply bg-[#050d18] font-pixelify;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+.btn {
+  @apply bg-white rounded-3xl py-2 px-6 text-black w-fit font-pixelify;
+}
+
+.connect-wallet1 {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: large;
+  display: grid;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 550px;
+  margin-top: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: opacity 0.3s;
+  vertical-align: top;
+}
+.connect-wallet2-text {
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: large;
+  display: grid;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 270px;
+  margin-top: 100px;
+  transition: opacity 0.3s;
+  vertical-align: top;
+}
+.connect-wallet2 {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: large;
+  display: grid;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 270px;
+  margin-top: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: opacity 0.3s;
+  vertical-align: top;
+}
+.connect-wallet3 {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: large;
+  display: grid;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 500px;
+  margin-top: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: opacity 0.3s;
+  vertical-align: top;
+}
+.connect-wallet4 {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: large;
+  display: grid;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 200px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: opacity 0.3s;
+  vertical-align: top;
+}
+.connect-wallet5 {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: large;
+  display: grid;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 600px;
+  margin-top: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: opacity 0.3s;
+  vertical-align: top;
+}
