@@ -1,4 +1,3 @@
-import { Data } from "@/data/treeProofs";
 import getProofData from "@/services/getProof";
 import { NextRequest, NextResponse } from "next/server";
 
