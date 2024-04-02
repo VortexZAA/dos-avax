@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import Loader from "@/components/Loader";
+import pb from "@/lib/pocketbase";
 
 export default function Home() {
   const [amount, setAmount] = useState<string>("");

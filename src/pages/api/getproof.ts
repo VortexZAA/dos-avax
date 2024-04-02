@@ -1,4 +1,4 @@
-import getProofData from "@/services/getProof";
+import pb from "@/lib/pocketbase";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "edge";
@@ -6,32 +6,51 @@ export const runtime = "edge";
 export default async function GET(req: NextRequest) {
   const address = req.nextUrl.searchParams.get("address") as string;
   try {
-    const get = address && (await getProofData(address));
-    const getProof = get && {
-      address: get?.value[0],
-      amount: get?.value[1],
-      proof: get?.proof,
-    };
-
-    if (getProof && address) {
-      return NextResponse.json({
-        address: address || "",
-        reponse: getProof,
-        msg: "success",
+    let error:any = ""
+    const get = await pb
+      .collection("airdrop")
+      .getFirstListItem(`address~"${address}"`)
+      .then((res) => res)
+      .catch((err) => {
+        error = err;
+        return false;
       });
+    const getProof = get;
+    if (getProof && address) {
+      return NextResponse.json(
+        {
+          address: address || "",
+          reponse: getProof,
+          msg: "success",
+        },
+        {
+          status: 200,
+        }
+      );
     } else {
-      return NextResponse.json({
+      return NextResponse.json(
+        {
+          address: address || "",
+          status: "error",
+          msg: "There was a problem",
+          error: error?.message || "Not Found",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+  } catch (error: any) {
+    return NextResponse.json(
+      {
         address: address || "",
         status: "error",
         msg: "There was a problem",
-      });
-    }
-  } catch (error: any) {
-    return NextResponse.json({
-      address: address || "",
-      status: "error",
-      msg: "There was a problem",
-      error: error.message,
-    });
+        error: error.message,
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }
