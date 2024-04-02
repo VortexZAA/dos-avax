@@ -9,6 +9,7 @@ import {
 } from "@/contractInteractions/useAppContracts";
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
+import Loader from "@/components/Loader";
 
 export default function Home() {
   const [amount, setAmount] = useState<string>("");
@@ -41,14 +42,18 @@ export default function Home() {
     }
   }
   const [proof, setProof] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   async function getProof() {
     try {
+      setLoading(true);
       const res = await fetch(`/api/getproof?address=${address}`);
       const data = await res.json();
       setProof(data.reponse);
       console.log("data", data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
   useEffect(() => {
@@ -58,6 +63,7 @@ export default function Home() {
     <main
       className={`flex min-h-screen flex-col gap-32 items-center w-[100vw] overflow-x-hidden relative justify-between px-8 pb-3`}
     >
+      {loading && <Loader />}
       <div className="grid grid-cols-2 w-full gap-20 pt-6">
         <div className="flex flex-col w-full gap-6 ">
           <div className="paragraph-title">

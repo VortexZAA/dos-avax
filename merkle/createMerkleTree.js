@@ -13,7 +13,8 @@ const convertAmount = (value, decimal = 18) => {
 } */
 // (1)
 
-const data = Data;
+//const data = Data;
+const data = JSON.parse(fs.readFileSync("table1.json"));
 //console.log("data", data);
 const values = data.map(({ address, amount }) => [
   address,
