@@ -1,24 +1,20 @@
 import { Data } from "@/data/treeProofs";
+import getProofData from "@/services/getProof";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "edge";
 
 export default async function GET(req: NextRequest) {
-  const address = req.nextUrl.searchParams.get("address");
+  const address = req.nextUrl.searchParams.get("address") as string;
   try {
-    const get = Data.find((v: any) => {
-      if (v.value[0]?.toLowerCase() === address?.toLowerCase()) {
-        return true;
-      }
-    });
+    const get = address && (await getProofData(address));
     const getProof = get && {
-      address: get.value[0],
-      amount: get.value[1],
-
-      proof: get.proof,
+      address: get?.value[0],
+      amount: get?.value[1],
+      proof: get?.proof,
     };
 
-    if (getProof) {
+    if (getProof && address) {
       return NextResponse.json({
         address: address || "",
         reponse: getProof,
