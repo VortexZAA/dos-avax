@@ -113,6 +113,7 @@ export default function Home() {
             <button
               onClick={async () => {
                 if (proof) {
+                  console.log(proof.proof, proof.amount, proof.address);
                   await callAirDropClaim(
                     proof.proof,
                     proof.amount,
